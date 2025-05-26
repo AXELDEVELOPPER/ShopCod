@@ -197,7 +197,7 @@ body {
 
 /* Sección Imagen */
 .hero {
-  background-image: url('../docs/Imagenes/procesador.jpeg'); /* Reemplaza con tu imagen */
+  background-image: url('../Imagenes/procesador.jpeg'); /* Reemplaza con tu imagen */
   background-size: cover;
   background-position: center;
   min-height: 85vh;
