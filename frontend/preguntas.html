@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Preguntas Frecuentes - TechNova Store</title>
+  <link rel="stylesheet" href="../css/estilo.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    header {
+      background-color: #1e1e2f;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .faq {
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .faq h3 {
+      cursor: pointer;
+      margin: 0;
+      font-size: 1.1rem;
+      color: #007bff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq h3:hover {
+      text-decoration: underline;
+    }
+
+    .faq p {
+      margin-top: 0.5rem;
+      display: none;
+      color: #333;
+    }
+
+    .faq.active p {
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #1e1e2f;
+      color: white;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="Index.html" class="logo">
+      <img src="Imagenes/logo.png" alt="ShopCod Logo" />
+      <span>ShopCod</span>
+    </a>
+
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+
+    <ul class="nav-links">
+      <li><a href="Index.html"><i class="fas fa-house"></i> Inicio</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-laptop"></i> Productos</a>
+        <ul class="dropdown-menu">
+          <li><a href="portatiles.html"><i class="fas fa-laptop-code"></i> Laptops</a></li>
+          <li><a href="pcescritorio.html"><i class="fas fa-desktop"></i> PCs de escritorio</a></li>
+          <li><a href="monitores.html"><i class="fas fa-tv"></i> Monitores</a></li>
+          <li><a href="componentes.html"><i class="fas fa-microchip"></i> Componentes</a></li>
+          <li><a href="perifericos.html"><i class="fas fa-keyboard"></i> Periféricos</a></li>
+          <li><a href="accesorios.html"><i class="fas fa-headphones"></i> Accesorios</a></li>
+        </ul>
+      </li>
+
+      <li><a href="ofertas.html"><i class="fas fa-tags"></i> Ofertas</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-headset"></i> Atención al Cliente</a>
+        <ul class="dropdown-menu">
+          <li><a href="soporte.html"><i class="fas fa-tools"></i> Soporte Técnico</a></li>
+          <li><a href="preguntas.html"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+          <li><a href="envioydevolucion.html"fas fa-truck"></i> Envíos y Devoluciones</a></li>
+          <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+        </ul>
+      </li>
+
+      <li><a href="nosotros.html"><i class="fas fa-building"></i> Sobre Nosotros</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-user"></i> Mi Cuenta</a>
+        <ul class="dropdown-menu">
+          <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
+          <li><a href="registro.html"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+        </ul>
+      </li>
+
+      <li><a href="Carrito.html"><i class="fas fa-cart-shopping"></i> Carrito</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>¿Tienes dudas? Aquí te ayudamos</h2>
+
+    <div class="faq">
+      <h3 onclick="toggleFAQ(this)">¿Cuánto tiempo tarda en llegar mi pedido? <span>▼</span></h3>
+      <p>Los pedidos se entregan entre 2 a 5 días hábiles dependiendo de tu ubicación.</p>
+    </div>
+
+    <div class="faq">
+      <h3 onclick="toggleFAQ(this)">¿Puedo pagar contra entrega? <span>▼</span></h3>
+      <p>Por el momento no ofrecemos pago contra entrega, pero aceptamos tarjetas, Yape y transferencias.</p>
+    </div>
+
+    <div class="faq">
+      <h3 onclick="toggleFAQ(this)">¿Ofrecen garantía? <span>▼</span></h3>
+      <p>Sí. Todos nuestros productos cuentan con garantía de 6 a 12 meses, según el fabricante.</p>
+    </div>
+
+    <div class="faq">
+      <h3 onclick="toggleFAQ(this)">¿Cómo solicito soporte técnico? <span>▼</span></h3>
+      <p>Puedes visitar nuestra página de <a href="soporte.html">soporte técnico</a> y completar el formulario.</p>
+    </div>
+
+    <div class="faq">
+      <h3 onclick="toggleFAQ(this)">¿Puedo cambiar un producto defectuoso? <span>▼</span></h3>
+      <p>Claro. Solo debes contactarnos dentro de los primeros 7 días hábiles tras recibir tu producto.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 TechNova Store - Todos los derechos reservados.
+  </footer>
+
+  <script>
+    function toggleFAQ(element) {
+      const faq = element.parentElement;
+      faq.classList.toggle("active");
+      const icon = element.querySelector("span");
+      icon.textContent = faq.classList.contains("active") ? "▲" : "▼";
+    }
+  </script>
+</body>
+</html>

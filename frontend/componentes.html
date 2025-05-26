@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catálogo de Componentes</title>
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* RESET */
+   
+    h1, h2 {
+      margin: 0 0 1rem;
+    }
+
+    /* Layout principal */
+    .container {
+      max-width: 1100px;
+      margin: 1rem auto;
+      padding: 0 1rem;
+      display: flex;
+      gap: 2rem;
+    }
+
+    /* Sidebar filtros */
+    .sidebar {
+      flex: 0 0 280px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 3px 15px rgb(0 0 0 / 0.1);
+      height: fit-content;
+      position: sticky;
+      top: 1rem;
+    }
+
+    .filter-group {
+      margin-bottom: 2rem;
+    }
+
+    .filter-group h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      border-bottom: 2px solid #0077b6;
+      padding-bottom: 0.3rem;
+      color: #0077b6;
+    }
+
+    .filter-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+
+    /* Productos */
+    .products-container {
+      flex: 1;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 3px 15px rgb(0 0 0 / 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 8px 25px rgb(0 0 0 / 0.15);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .product-name {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      font-size: 1.1rem;
+      color: #023047;
+    }
+
+    .product-type {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 0.7rem;
+    }
+
+    .product-price {
+      font-weight: 700;
+      color: #ef476f;
+      margin-top: auto;
+      font-size: 1.15rem;
+    }
+
+    /* Paginación */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .pagination button {
+      border: none;
+      background: #e0e0e0;
+      padding: 0.5rem 0.9rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #444;
+      transition: background-color 0.3s ease;
+    }
+
+    .pagination button:hover {
+      background: #0077b6;
+      color: white;
+    }
+
+    .pagination button.active {
+      background: #ef476f;
+      color: white;
+      cursor: default;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        position: static;
+        width: 100%;
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="Index.html" class="logo">
+          <img src="Imagenes/logo.png" alt="ShopCod Logo" />
+          <span>ShopCod</span>
+        </a>
+    
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+    
+        <ul class="nav-links">
+          <li><a href="Index.html"><i class="fas fa-house"></i> Inicio</a></li>
+    
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-laptop"></i> Productos</a>
+            <ul class="dropdown-menu">
+              <li><a href="portatiles.html"><i class="fas fa-laptop-code"></i> Laptops</a></li>
+              <li><a href="pcescritorio.html"><i class="fas fa-desktop"></i> PCs de escritorio</a></li>
+              <li><a href="monitores.html"><i class="fas fa-tv"></i> Monitores</a></li>
+              <li><a href="componentes.html"><i class="fas fa-microchip"></i> Componentes</a></li>
+              <li><a href="perifericos.html"><i class="fas fa-keyboard"></i> Periféricos</a></li>
+              <li><a href="accesorios.html"><i class="fas fa-headphones"></i> Accesorios</a></li>
+            </ul>
+          </li>
+    
+          <li><a href="ofertas.html"><i class="fas fa-tags"></i> Ofertas</a></li>
+    
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-headset"></i> Atención al Cliente</a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><i class="fas fa-tools"></i> Soporte Técnico</a></li>
+              <li><a href="#"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+              <li><a href="#"><i class="fas fa-truck"></i> Envíos y Devoluciones</a></li>
+              <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
+            </ul>
+          </li>
+    
+          <li><a href="nosotros.html"><i class="fas fa-building"></i> Sobre Nosotros</a></li>
+    
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-user"></i> Mi Cuenta</a>
+            <ul class="dropdown-menu">
+              <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
+              <li><a href="registro.html"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+            </ul>
+          </li>
+    
+          <li><a href="Carrito.html"><i class="fas fa-cart-shopping"></i> Carrito</a></li>
+        </ul>
+      </nav>
+
+  <div class="container">
+
+    <!-- Sidebar filtros -->
+    <aside class="sidebar">
+      <div class="filter-group">
+        <h2>Tipo de Componente</h2>
+        <label><input type="checkbox" name="type" value="Procesador" /> Procesador</label>
+        <label><input type="checkbox" name="type" value="Memoria RAM" /> Memoria RAM</label>
+        <label><input type="checkbox" name="type" value="Tarjeta Gráfica" /> Tarjeta Gráfica</label>
+        <label><input type="checkbox" name="type" value="Disco Duro" /> Disco Duro</label>
+      </div>
+      <div class="filter-group">
+        <h2>Marca</h2>
+        <label><input type="checkbox" name="brand" value="Intel" /> Intel</label>
+        <label><input type="checkbox" name="brand" value="AMD" /> AMD</label>
+        <label><input type="checkbox" name="brand" value="Corsair" /> Corsair</label>
+        <label><input type="checkbox" name="brand" value="NVIDIA" /> NVIDIA</label>
+        <label><input type="checkbox" name="brand" value="Seagate" /> Seagate</label>
+      </div>
+      <div class="filter-group">
+        <h2>Precio</h2>
+        <label><input type="checkbox" name="price" value="0-150" /> Hasta $150</label>
+        <label><input type="checkbox" name="price" value="151-400" /> $151 - $400</label>
+        <label><input type="checkbox" name="price" value="401-99999" /> Más de $400</label>
+      </div>
+    </aside>
+
+    <!-- Productos -->
+    <section class="products-container">
+      <div class="products-grid" id="products-grid">
+        <!-- Productos generados dinámicamente -->
+      </div>
+
+      <div class="pagination" id="pagination">
+        <!-- Botones de paginación -->
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Datos de ejemplo para componentes
+    const products = [
+      { id: 1, name: "Intel Core i7-12700K", type: "Procesador", brand: "Intel", price: 380, img: "Imagenes/ACCESORIOS/comp1.jpg" },
+      { id: 2, name: "AMD Ryzen 5 5600X", type: "Procesador", brand: "AMD", price: 250, img: "Imagenes/ACCESORIOS/comp2.jpg" },
+      { id: 3, name: "Corsair Vengeance 16GB DDR4", type: "Memoria RAM", brand: "Corsair", price: 90, img: "Imagenes/ACCESORIOS/comp3.jpg" },
+      { id: 4, name: "NVIDIA RTX 3060", type: "Tarjeta Gráfica", brand: "NVIDIA", price: 420, img: "Imagenes/ACCESORIOS/comp4.jpg" },
+      { id: 5, name: "Seagate BarraCuda 1TB", type: "Disco Duro", brand: "Seagate", price: 55, img: "Imagenes/ACCESORIOS/comp5.jpg" },
+      { id: 6, name: "AMD Radeon RX 6600 XT", type: "Tarjeta Gráfica", brand: "AMD", price: 380, img: "Imagenes/ACCESORIOS/comp6.jpg" },
+      { id: 7, name: "Corsair Dominator 32GB DDR4", type: "Memoria RAM", brand: "Corsair", price: 170, img: "Imagenes/ACCESORIOS/comp7.jpg" },
+      { id: 8, name: "Intel Core i5-12400F", type: "Procesador", brand: "Intel", price: 200, img: "Imagenes/ACCESORIOS/comp8.jpg" },
+      { id: 9, name: "Seagate IronWolf 4TB", type: "Disco Duro", brand: "Seagate", price: 160, img: "Imagenes/ACCESORIOS/comp9.jpg" },
+    ];
+
+    const productsPerPage = 4;
+    let currentPage = 1;
+    let filteredProducts = [...products];
+
+    // Render productos
+    function renderProducts() {
+      const grid = document.getElementById('products-grid');
+      grid.innerHTML = '';
+
+      const start = (currentPage - 1) * productsPerPage;
+      const end = start + productsPerPage;
+      const paginatedProducts = filteredProducts.slice(start, end);
+
+      if (paginatedProducts.length === 0) {
+        grid.innerHTML = '<p>No se encontraron productos con los filtros seleccionados.</p>';
+        return;
+      }
+
+      paginatedProducts.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <img src="${product.img}" alt="${product.name}" class="product-img" />
+          <h3 class="product-name">${product.name}</h3>
+          <p class="product-type">${product.type} - ${product.brand}</p>
+          <p class="product-price">$${product.price}</p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Render paginación
+    function renderPagination() {
+      const pagination = document.getElementById('pagination');
+      pagination.innerHTML = '';
+
+      const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+      if(totalPages <= 1) return;
+
+      for(let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.className = i === currentPage ? 'active' : '';
+        btn.addEventListener('click', () => {
+          if(i !== currentPage) {
+            currentPage = i;
+            renderProducts();
+            renderPagination();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+        pagination.appendChild(btn);
+      }
+    }
+
+    // Aplicar filtros
+    function applyFilters() {
+      // Obtener filtros seleccionados
+      const typeFilters = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(input => input.value);
+      const brandFilters = Array.from(document.querySelectorAll('input[name="brand"]:checked')).map(input => input.value);
+      const priceFilters = Array.from(document.querySelectorAll('input[name="price"]:checked')).map(input => input.value);
+
+      filteredProducts = products.filter(product => {
+        const typeMatch = typeFilters.length === 0 || typeFilters.includes(product.type);
+        const brandMatch = brandFilters.length === 0 || brandFilters.includes(product.brand);
+
+        let priceMatch = false;
+        if(priceFilters.length === 0) {
+          priceMatch = true;
+        } else {
+          for(const range of priceFilters) {
+            const [min, max] = range.split('-').map(Number);
+            if(product.price >= min && product.price <= max) {
+              priceMatch = true;
+              break;
+            }
+          }
+        }
+
+        return typeMatch && brandMatch && priceMatch;
+      });
+
+      currentPage = 1;
+      renderProducts();
+      renderPagination();
+    }
+
+    // Añadir event listeners a filtros
+    const filters = document.querySelectorAll('input[type="checkbox"]');
+    filters.forEach(filter => {
+      filter.addEventListener('change', applyFilters);
+    });
+
+    // Render inicial
+    renderProducts();
+    renderPagination();
+  </script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - ShopCod</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+      /* Estilos para la página del carrito */
+.cart-page {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cart-page h1 {
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+.cart-container {
+    display: flex;
+    gap: 30px;
+}
+
+.cart-items-section {
+    flex: 2;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.checkout-section {
+    flex: 1;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    height: fit-content;
+}
+
+.cart-items-header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.cart-items-header h2 {
+    font-size: 1.2rem;
+}
+
+.cart-item-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item-info {
+    display: flex;
+    gap: 15px;
+    flex: 1;
+}
+
+.cart-item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-details h3 {
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.cart-item-details p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.quantity-btn:hover {
+    background: #eee;
+}
+
+.remove-item {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.remove-item:hover {
+    text-decoration: underline;
+}
+
+.cart-item-price {
+    font-weight: bold;
+    min-width: 100px;
+    text-align: right;
+}
+
+.cart-subtotal {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    font-weight: bold;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 40px;
+    color: #7f8c8d;
+}
+
+.checkout-summary {
+    margin-bottom: 25px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.summary-row.total {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.payment-methods {
+    margin: 25px 0;
+}
+
+.payment-option {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.payment-option label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.payment-option input[type="radio"] {
+    margin-right: 5px;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkout-btn:hover {
+    background-color: #219653;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cart-container {
+        flex-direction: column;
+    }
+    
+    .cart-item-info {
+        flex-direction: column;
+    }
+    
+    .cart-item-image {
+        width: 100%;
+        height: auto;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Navbar (igual al de tu página principal) -->
+    <nav class="navbar">
+    <a href="Index.html" class="logo">
+      <img src="Imagenes/logo.png" alt="ShopCod Logo" />
+      <span>ShopCod</span>
+    </a>
+
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+
+    <ul class="nav-links">
+      <li><a href="Index.html"><i class="fas fa-house"></i> Inicio</a></li>
+
+      <li class="dropdown">
+        <a href="Productos.html"><i class="fas fa-laptop"></i> Productos</a>
+        <ul class="dropdown-menu">
+          <li><a href="portatiles.html"><i class="fas fa-laptop-code"></i> Laptops</a></li>
+          <li><a href="pcescritorio.html"><i class="fas fa-desktop"></i> PCs de escritorio</a></li>
+          <li><a href="monitores.html"><i class="fas fa-tv"></i> Monitores</a></li>
+          <li><a href="componentes.html"><i class="fas fa-microchip"></i> Componentes</a></li>
+          <li><a href="perifericos.html"><i class="fas fa-keyboard"></i> Periféricos</a></li>
+          <li><a href="accesorios.html"><i class="fas fa-headphones"></i> Accesorios</a></li>
+        </ul>
+      </li>
+
+      <li><a href="ofertas.html"><i class="fas fa-tags"></i> Ofertas</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-headset"></i> Atención al Cliente</a>
+        <ul class="dropdown-menu">
+          <li><a href="soporte.html"><i class="fas fa-tools"></i> Soporte Técnico</a></li>
+          <li><a href="preguntas.html"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+          <li><a href="envioydevolucion.html"><i class="fas fa-truck"></i> Envíos y Devoluciones</a></li>
+          <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+        </ul>
+      </li>
+
+      <li><a href="nosotros.html"><i class="fas fa-building"></i> Sobre Nosotros</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-user"></i> Mi Cuenta</a>
+        <ul class="dropdown-menu">
+          <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
+          <li><a href="registro.html"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+        </ul>
+      </li>
+
+      <li>
+    <a href="Carrito.html">
+    <i class="fas fa-cart-shopping"></i> Carrito
+    <span id="cart-count" style="background:red;color:white;border-radius:50%;padding:2px 8px;font-size:0.8rem;">0</span>
+  </a>
+</li>
+</ul>
+  </nav>
+
+    <main class="cart-page">
+        <h1>Tu Carrito de Compras</h1>
+        
+        <div class="cart-container">
+            <section class="cart-items-section">
+                <div class="cart-items-header">
+                    <h2>Productos</h2>
+                    <span>Precio</span>
+                </div>
+                <div class="cart-items" id="cart-items">
+                    <!-- Los productos del carrito se cargarán aquí -->
+                </div>
+                <div class="cart-subtotal">
+                    <span>Subtotal</span>
+                    <span id="subtotal-amount">$0.00</span>
+                </div>
+            </section>
+
+            <section class="checkout-section">
+                <h2>Resumen de Compra</h2>
+                <div class="checkout-summary">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="summary-subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Envío</span>
+                        <span id="shipping-cost">$0.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="total-amount">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="payment-methods">
+                    <h3>Método de Pago</h3>
+                    <div class="payment-option">
+                        <input type="radio" id="credit-card" name="payment" value="credit-card" checked>
+                        <label for="credit-card">
+                            <i class="fas fa-credit-card"></i> Tarjeta de Crédito/Débito
+                        </label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="paypal" name="payment" value="paypal">
+                        <label for="paypal">
+                            <i class="fab fa-paypal"></i> PayPal
+                        </label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="bank-transfer" name="payment" value="bank-transfer">
+                        <label for="bank-transfer">
+                            <i class="fas fa-university"></i> Transferencia Bancaria
+                        </label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="cash" name="payment" value="cash">
+                        <label for="cash">
+                            <i class="fas fa-money-bill-wave"></i> Efectivo al Recibir
+                        </label>
+                    </div>
+                </div>
+
+                <button class="checkout-btn" id="checkout-btn">Finalizar Compra</button>
+            </section>
+        </div>
+    </main>
+
+    <script>
+// Obtener productos del carrito desde localStorage
+function obtenerCarrito() {
+  const carrito = localStorage.getItem("carrito");
+  return carrito ? JSON.parse(carrito) : [];
+}
+
+// Guardar carrito actualizado en localStorage
+function guardarCarrito(carrito) {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+// Mostrar productos en el carrito
+function mostrarProductosEnCarrito() {
+  const productos = obtenerCarrito();
+  const contenedor = document.getElementById("cart-items");
+  const subtotalSpan = document.getElementById("subtotal-amount");
+  const resumenSubtotal = document.getElementById("summary-subtotal");
+  const resumenTotal = document.getElementById("total-amount");
+
+  contenedor.innerHTML = "";
+
+  let subtotal = 0;
+
+  if (productos.length === 0) {
+    contenedor.innerHTML = `<p class="empty-cart">Tu carrito está vacío.</p>`;
+  } else {
+    productos.forEach((producto, index) => {
+        console.log(`Producto ${index}`, producto);
+      // Convierte precio y cantidad a números para evitar NaN
+      const precioUnitario = Number(producto.precio) || 0;
+      let cantidad = parseInt(producto.cantidad) || 1;
+      if (cantidad < 1) cantidad = 1; // cantidad mínima 1
+      const precioTotal = precioUnitario * cantidad;
+
+      subtotal += precioTotal;
+
+      const fila = document.createElement("div");
+      fila.className = "cart-item-row";
+      fila.innerHTML = `
+        <div class="cart-item-info">
+          <img class="cart-item-image" src="${producto.imagen}" alt="${producto.nombre}">
+          <div class="cart-item-details">
+            <h3>${producto.nombre}</h3>
+            <p>${producto.descripcion || ""}</p>
+            <div class="cart-item-actions">
+              <button class="quantity-btn" onclick="cambiarCantidad(${index}, -1)">-</button>
+              <span>${cantidad}</span>
+              <button class="quantity-btn" onclick="cambiarCantidad(${index}, 1)">+</button>
+              <button class="remove-item" onclick="eliminarProducto(${index})">Eliminar</button>
+            </div>
+          </div>
+        </div>
+        <div class="cart-item-price">$${precioTotal.toFixed(2)}</div>
+      `;
+      contenedor.appendChild(fila);
+    });
+  }
+
+  subtotalSpan.textContent = `$${subtotal.toFixed(2)}`;
+  resumenSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+  resumenTotal.textContent = `$${subtotal.toFixed(2)}`;
+  actualizarContadorCarrito();
+}
+
+// Cambiar cantidad de un producto en el carrito
+function cambiarCantidad(index, cambio) {
+  const carrito = obtenerCarrito();
+  if (!carrito[index]) return;
+
+  let cantidad = parseInt(carrito[index].cantidad) || 1;
+  cantidad += cambio;
+  if (cantidad < 1) cantidad = 1;
+
+  carrito[index].cantidad = cantidad;
+  guardarCarrito(carrito);
+  mostrarProductosEnCarrito();
+}
+
+// Eliminar producto del carrito
+function eliminarProducto(index) {
+  const carrito = obtenerCarrito();
+  if (!carrito[index]) return;
+
+  carrito.splice(index, 1);
+  guardarCarrito(carrito);
+  mostrarProductosEnCarrito();
+}
+
+// Actualizar el contador visible del carrito en la navbar
+function actualizarContadorCarrito() {
+  const carrito = obtenerCarrito();
+  const contador = carrito.reduce((total, producto) => {
+    const cant = parseInt(producto.cantidad) || 1;
+    return total + cant;
+  }, 0);
+  document.getElementById("cart-count").textContent = contador;
+}
+
+// Inicializar la página cargando productos
+document.addEventListener("DOMContentLoaded", () => {
+  mostrarProductosEnCarrito();
+
+  // Ejemplo: botón finalizar compra
+  document.getElementById("checkout-btn").addEventListener("click", () => {
+    alert("Gracias por tu compra. ¡Procesando pago!");
+    // Aquí puedes agregar lógica para limpiar carrito, redirigir, etc.
+  });
+});
+
+</script>
+
+</body>
+</html>

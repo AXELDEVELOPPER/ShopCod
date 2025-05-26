@@ -1,0 +1,316 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tienda - Todos los Productos</title>
+  <link rel="stylesheet" href="../css/estilo.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      margin: 10px;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 20px;
+    }
+
+    .filtro-categorias {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .filter-btn {
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background-color: #3498db;
+    }
+
+    .contenedor-productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    .card-producto {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card-producto:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-producto img {
+      max-width: 100%;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+
+    .card-producto h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .card-producto p {
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .btn-carrito {
+      background-color: #e67e22;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-weight: bold;
+    }
+
+    .btn-carrito:hover {
+      background-color: #d35400;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="Index.html" class="logo">
+      <img src="Imagenes/logo.png" alt="ShopCod Logo" />
+      <span>ShopCod</span>
+    </a>
+
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+
+    <ul class="nav-links">
+      <li><a href="Index.html"><i class="fas fa-house"></i> Inicio</a></li>
+
+      <li class="dropdown">
+        <a href="Productos.html"><i class="fas fa-laptop"></i> Productos</a>
+        <ul class="dropdown-menu">
+          <li><a href="portatiles.html"><i class="fas fa-laptop-code"></i> Laptops</a></li>
+          <li><a href="pcescritorio.html"><i class="fas fa-desktop"></i> PCs de escritorio</a></li>
+          <li><a href="monitores.html"><i class="fas fa-tv"></i> Monitores</a></li>
+          <li><a href="componentes.html"><i class="fas fa-microchip"></i> Componentes</a></li>
+          <li><a href="perifericos.html"><i class="fas fa-keyboard"></i> Periféricos</a></li>
+          <li><a href="accesorios.html"><i class="fas fa-headphones"></i> Accesorios</a></li>
+        </ul>
+      </li>
+
+      <li><a href="ofertas.html"><i class="fas fa-tags"></i> Ofertas</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-headset"></i> Atención al Cliente</a>
+        <ul class="dropdown-menu">
+          <li><a href="soporte.html"><i class="fas fa-tools"></i> Soporte Técnico</a></li>
+          <li><a href="preguntas.html"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+          <li><a href="envioydevolucion.html"><i class="fas fa-truck"></i> Envíos y Devoluciones</a></li>
+          <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+        </ul>
+      </li>
+
+      <li><a href="nosotros.html"><i class="fas fa-building"></i> Sobre Nosotros</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-user"></i> Mi Cuenta</a>
+        <ul class="dropdown-menu">
+          <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
+          <li><a href="registro.html"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+        </ul>
+      </li>
+
+      <li>
+    <a href="Carrito.html">
+    <i class="fas fa-cart-shopping"></i> Carrito
+    <span id="cart-count" style="background:red;color:white;border-radius:50%;padding:2px 8px;font-size:0.8rem;">0</span>
+  </a>
+</li>
+
+  </nav>
+
+  <header>
+    <h1>Catálogo de Productos</h1>
+  <div class="filtro-categorias">
+  <button class="filter-btn active" data-categoria="todos">Todos</button>
+  <button class="filter-btn" data-categoria="laptops">Laptops</button>
+  <button class="filter-btn" data-categoria="monitores">Monitores</button>
+  <button class="filter-btn" data-categoria="accesorios">Accesorios</button>
+  <button class="filter-btn" data-categoria="pcs de escritorio">PCs de Escritorio</button>
+  <button class="filter-btn" data-categoria="componentes">Componentes</button>
+  <button class="filter-btn" data-categoria="periféricos">Periféricos</button>
+</div>
+  </header>
+
+  <main class="contenedor-productos" id="contenedor-productos">
+    <!-- Los productos se generarán aquí por JS -->
+  </main>
+
+  <script>
+   const productos = [ 
+  // Laptops
+  { nombre: "Laptop HP 14s", categoria: "laptops", precio: "$750", imagen: "Imagenes/productos/1.jpg" },
+  { nombre: "Laptop Lenovo IdeaPad 3", categoria: "laptops", precio: "$680", imagen: "Imagenes/productos/2.jpg" },
+  { nombre: "Laptop Dell Inspiron 15", categoria: "laptops", precio: "$800", imagen: "Imagenes/productos/3.jpg" },
+  { nombre: "Laptop Acer Aspire 5", categoria: "laptops", precio: "$720", imagen: "Imagenes/productos/4.jpg" },
+  { nombre: "Laptop ASUS VivoBook", categoria: "laptops", precio: "$740", imagen: "Imagenes/productos/5.jpg" },
+  { nombre: "Laptop Apple MacBook Air M1", categoria: "laptops", precio: "$1050", imagen: "Imagenes/productos/6.jpg" },
+  { nombre: "Laptop Microsoft Surface", categoria: "laptops", precio: "$950", imagen: "Imagenes/productos/7.jpg" },
+  { nombre: "Laptop HP Envy", categoria: "laptops", precio: "$890", imagen: "Imagenes/productos/8.jpg" },
+  { nombre: "Laptop MSI Modern 14", categoria: "laptops", precio: "$830", imagen: "Imagenes/productos/9.jpg" },
+  { nombre: "Laptop Lenovo ThinkPad", categoria: "laptops", precio: "$880", imagen: "Imagenes/productos/10.jpg" },
+
+  // PCs de escritorio
+  { nombre: "PC Intel Core i5 + 8GB RAM", categoria: "pcs de escritorio", precio: "$520", imagen: "Imagenes/productos/11.jpg" },
+  { nombre: "PC Gamer Ryzen 5 + GTX 1660", categoria: "pcs de escritorio", precio: "$750", imagen: "Imagenes/productos/12.jpg" },
+  { nombre: "PC Oficina HP EliteDesk", categoria: "pcs de escritorio", precio: "$490", imagen: "Imagenes/productos/13.jpg" },
+  { nombre: "PC All-in-One Lenovo", categoria: "pcs de escritorio", precio: "$670", imagen: "Imagenes/productos/14.jpg" },
+  { nombre: "PC Dell OptiPlex", categoria: "pcs de escritorio", precio: "$580", imagen: "Imagenes/productos/15.jpg" },
+  { nombre: "PC Intel Core i7 + SSD", categoria: "pcs de escritorio", precio: "$640", imagen: "Imagenes/productos/16.jpg" },
+  { nombre: "PC ASUS Mini Tower", categoria: "pcs de escritorio", precio: "$610", imagen: "Imagenes/productos/17.jpg" },
+  { nombre: "PC HP ProDesk", categoria: "pcs de escritorio", precio: "$560", imagen: "Imagenes/productos/18.jpg" },
+  { nombre: "PC Gaming Intel i5 + RTX 3060", categoria: "pcs de escritorio", precio: "$980", imagen: "Imagenes/productos/19.jpg" },
+  { nombre: "PC Básico AMD Athlon", categoria: "pcs de escritorio", precio: "$430", imagen: "Imagenes/productos/20.jpg" },
+
+  // Monitores
+  { nombre: "Monitor LG 24” Full HD", categoria: "monitores", precio: "$180", imagen: "Imagenes/productos/21.jpg" },
+  { nombre: "Monitor Samsung 27” Curvo", categoria: "monitores", precio: "$230", imagen: "Imagenes/productos/22.jpg" },
+  { nombre: "Monitor ASUS 24” 75Hz", categoria: "monitores", precio: "$160", imagen: "Imagenes/productos/23.jpg" },
+  { nombre: "Monitor Dell 22”", categoria: "monitores", precio: "$140", imagen: "Imagenes/productos/24.jpg" },
+  { nombre: "Monitor AOC 27” Gaming", categoria: "monitores", precio: "$250", imagen: "Imagenes/productos/25.jpg" },
+  { nombre: "Monitor HP 23.8”", categoria: "monitores", precio: "$170", imagen: "Imagenes/productos/26.jpg" },
+  { nombre: "Monitor Philips 24”", categoria: "monitores", precio: "$165", imagen: "Imagenes/productos/27.jpg" },
+  { nombre: "Monitor Lenovo 22”", categoria: "monitores", precio: "$150", imagen: "Imagenes/productos/28.jpg" },
+  { nombre: "Monitor Samsung Smart Monitor", categoria: "monitores", precio: "$280", imagen: "Imagenes/productos/29.jpg" },
+  { nombre: "Monitor BenQ Eye-Care", categoria: "monitores", precio: "$190", imagen: "Imagenes/productos/30.jpg" },
+
+  // Componentes
+{ nombre: "Procesador Intel Core i5", categoria: "componentes", precio: "$210", imagen: "https://via.placeholder.com/240x180?text=Intel+i5" },
+{ nombre: "Procesador AMD Ryzen 5", categoria: "componentes", precio: "$220", imagen: "https://via.placeholder.com/240x180?text=Ryzen+5" },
+{ nombre: "Memoria RAM 8GB DDR4", categoria: "componentes", precio: "$45", imagen: "https://via.placeholder.com/240x180?text=RAM+8GB" },
+{ nombre: "SSD 480GB Kingston", categoria: "componentes", precio: "$55", imagen: "https://via.placeholder.com/240x180?text=SSD+480GB" },
+{ nombre: "HDD 1TB Western Digital", categoria: "componentes", precio: "$50", imagen: "https://via.placeholder.com/240x180?text=HDD+1TB" },
+{ nombre: "Tarjeta Gráfica GTX 1660", categoria: "componentes", precio: "$320", imagen: "https://via.placeholder.com/240x180?text=GTX+1660" },
+{ nombre: "Fuente EVGA 500W", categoria: "componentes", precio: "$60", imagen: "https://via.placeholder.com/240x180?text=EVGA+500W" },
+{ nombre: "Placa madre ASUS B450", categoria: "componentes", precio: "$95", imagen: "https://via.placeholder.com/240x180?text=ASUS+B450" },
+{ nombre: "Cooler CPU RGB", categoria: "componentes", precio: "$30", imagen: "https://via.placeholder.com/240x180?text=Cooler+RGB" },
+{ nombre: "Case Mid Tower Gaming", categoria: "componentes", precio: "$85", imagen: "https://via.placeholder.com/240x180?text=Case+Gaming" },
+{ nombre: "Memoria RAM 16GB DDR4", categoria: "componentes", precio: "$80", imagen: "https://via.placeholder.com/240x180?text=RAM+16GB" },
+{ nombre: "Tarjeta Madre MSI B550", categoria: "componentes", precio: "$120", imagen: "https://via.placeholder.com/240x180?text=MSI+B550" },
+
+// Periféricos
+{ nombre: "Teclado Mecánico RGB", categoria: "periféricos", precio: "$70", imagen: "https://via.placeholder.com/240x180?text=Teclado+RGB" },
+{ nombre: "Mouse Gamer Logitech", categoria: "periféricos", precio: "$45", imagen: "https://via.placeholder.com/240x180?text=Mouse+Gamer" },
+{ nombre: "Auriculares Redragon", categoria: "periféricos", precio: "$65", imagen: "https://via.placeholder.com/240x180?text=Auriculares" },
+{ nombre: "Webcam Full HD", categoria: "periféricos", precio: "$50", imagen: "https://via.placeholder.com/240x180?text=Webcam+FHD" },
+{ nombre: "Micrófono USB", categoria: "periféricos", precio: "$60", imagen: "https://via.placeholder.com/240x180?text=Micrófono+USB" },
+{ nombre: "Pad Mouse XL", categoria: "periféricos", precio: "$18", imagen: "https://via.placeholder.com/240x180?text=Pad+XL" },
+{ nombre: "Joystick para PC", categoria: "periféricos", precio: "$35", imagen: "https://via.placeholder.com/240x180?text=Joystick" },
+{ nombre: "Base refrigerante para laptop", categoria: "periféricos", precio: "$40", imagen: "https://via.placeholder.com/240x180?text=Base+refrigerante" },
+{ nombre: "Auriculares Bluetooth", categoria: "periféricos", precio: "$55", imagen: "https://via.placeholder.com/240x180?text=Auriculares+Bluetooth" },
+{ nombre: "Monitor de ritmo cardíaco USB", categoria: "periféricos", precio: "$75", imagen: "https://via.placeholder.com/240x180?text=Monitor+Cardíaco+USB" },
+
+  // Accesorios
+  { nombre: "Cable HDMI 2m", categoria: "accesorios", precio: "$10", imagen: "https://via.placeholder.com/240x180?text=HDMI+2m" },
+  { nombre: "Hub USB 4 puertos", categoria: "accesorios", precio: "$20", imagen: "https://via.placeholder.com/240x180?text=Hub+USB+4" },
+  { nombre: "Cargador portátil 10,000mAh", categoria: "accesorios", precio: "$35", imagen: "https://via.placeholder.com/240x180?text=Powerbank" },
+  { nombre: "Bolsa para laptop 15”", categoria: "accesorios", precio: "$25", imagen: "https://via.placeholder.com/240x180?text=Bolsa+Laptop" },
+  { nombre: "Mouse pad ergonómico", categoria: "accesorios", precio: "$12", imagen: "https://via.placeholder.com/240x180?text=Mousepad+Ergo" },
+  { nombre: "Protector de pantalla", categoria: "accesorios", precio: "$8", imagen: "https://via.placeholder.com/240x180?text=Protector" },
+  { nombre: "Limpia pantallas", categoria: "accesorios", precio: "$7", imagen: "https://via.placeholder.com/240x180?text=Limpia+Pantallas" },
+  { nombre: "Base ajustable para laptop", categoria: "accesorios", precio: "$28", imagen: "https://via.placeholder.com/240x180?text=Base+Laptop" },
+  { nombre: "Soporte para celular", categoria: "accesorios", precio: "$10", imagen: "https://via.placeholder.com/240x180?text=Soporte+Celular" },
+  { nombre: "Memoria USB 64GB", categoria: "accesorios", precio: "$18", imagen: "https://via.placeholder.com/240x180?text=USB+64GB" }
+];
+
+     const contenedor = document.getElementById("contenedor-productos");
+  const botonesFiltro = document.querySelectorAll(".filter-btn");
+  let carrito = [];
+
+  // Renderiza productos
+  function renderizarProductos(categoria = "todos") {
+    contenedor.innerHTML = "";
+    const filtrados = categoria === "todos" ? productos : productos.filter(p => p.categoria === categoria);
+
+    filtrados.forEach(producto => {
+      const div = document.createElement("div");
+      div.classList.add("card-producto");
+      div.innerHTML = `
+        <img src="${producto.imagen}" alt="${producto.nombre}">
+        <h3>${producto.nombre}</h3>
+        <p>${producto.precio}</p>
+        <button class="btn-carrito">Añadir al carrito</button>
+      `;
+
+      const btn = div.querySelector(".btn-carrito");
+      btn.addEventListener("click", () => añadirAlCarrito(producto));
+
+      contenedor.appendChild(div);
+    });
+  }
+
+  // Maneja el filtrado
+  botonesFiltro.forEach(boton => {
+    boton.addEventListener("click", () => {
+      botonesFiltro.forEach(b => b.classList.remove("active"));
+      boton.classList.add("active");
+      renderizarProductos(boton.dataset.categoria);
+    });
+  });
+
+  // Añadir al carrito
+  function añadirAlCarrito(producto) {
+    carrito.push(producto);
+    actualizarContador();
+    guardarEnLocalStorage();
+  }
+
+  // Actualizar contador visual
+  function actualizarContador() {
+    const contador = document.getElementById("cart-count");
+    contador.textContent = carrito.length;
+  }
+
+  // Persistir en localStorage
+  function guardarEnLocalStorage() {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }
+
+  // Recuperar carrito al cargar
+  function cargarCarritoGuardado() {
+    const guardado = localStorage.getItem("carrito");
+    if (guardado) {
+      carrito = JSON.parse(guardado);
+      actualizarContador();
+    }
+  }
+
+  // Inicialización
+  cargarCarritoGuardado();
+  renderizarProductos();
+  </script>
+</body>
+</html>

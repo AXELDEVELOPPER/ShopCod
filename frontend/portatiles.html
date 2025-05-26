@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catálogo de Portátiles</title>
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* RESET */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+      color: #333;
+    }
+    h1, h2 {
+      margin: 0 0 1rem;
+    }
+
+    /* Layout principal */
+    .container {
+      max-width: 1200px;
+      margin: 1rem auto;
+      padding: 0 1rem;
+      display: flex;
+      gap: 2rem;
+    }
+
+    /* Sidebar filtros */
+    .sidebar {
+      flex: 0 0 250px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+      height: fit-content;
+      position: sticky;
+      top: 1rem;
+    }
+
+    .filter-group {
+      margin-bottom: 2rem;
+    }
+
+    .filter-group h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      border-bottom: 2px solid #005f73;
+      padding-bottom: 0.3rem;
+      color: #005f73;
+    }
+
+    .filter-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+
+    /* Productos */
+    .products-container {
+      flex: 1;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 140px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .product-name {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      color: #023047;
+    }
+
+    .product-price {
+      font-weight: 700;
+      color: #fb8500;
+      margin-top: auto;
+      font-size: 1.1rem;
+    }
+
+    /* Paginación */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .pagination button {
+      border: none;
+      background: #eee;
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #555;
+      transition: background-color 0.3s ease;
+    }
+
+    .pagination button:hover {
+      background: #005f73;
+      color: white;
+    }
+
+    .pagination button.active {
+      background: #fb8500;
+      color: white;
+      cursor: default;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        position: static;
+        width: 100%;
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="Index.html" class="logo">
+      <img src="Imagenes/logo.png" alt="ShopCod Logo" />
+      <span>ShopCod</span>
+    </a>
+
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+
+    <ul class="nav-links">
+      <li><a href="Index.html"><i class="fas fa-house"></i> Inicio</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-laptop"></i> Productos</a>
+        <ul class="dropdown-menu">
+          <li><a href="portatiles.html"><i class="fas fa-laptop-code"></i> Laptops</a></li>
+          <li><a href="pcescritorio.html"><i class="fas fa-desktop"></i> PCs de escritorio</a></li>
+          <li><a href="monitores.html"><i class="fas fa-tv"></i> Monitores</a></li>
+          <li><a href="componentes.html"><i class="fas fa-microchip"></i> Componentes</a></li>
+          <li><a href="perifericos.html"><i class="fas fa-keyboard"></i> Periféricos</a></li>
+          <li><a href="accesorios.html"><i class="fas fa-headphones"></i> Accesorios</a></li>
+        </ul>
+      </li>
+
+      <li><a href="ofertas.html"><i class="fas fa-tags"></i> Ofertas</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-headset"></i> Atención al Cliente</a>
+        <ul class="dropdown-menu">
+          <li><a href="soporte.html"><i class="fas fa-tools"></i> Soporte Técnico</a></li>
+          <li><a href="preguntas.html"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+          <li><a href="envioydevolucion.html"fas fa-truck"></i> Envíos y Devoluciones</a></li>
+          <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+        </ul>
+      </li>
+
+      <li><a href="nosotros.html"><i class="fas fa-building"></i> Sobre Nosotros</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-user"></i> Mi Cuenta</a>
+        <ul class="dropdown-menu">
+          <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
+          <li><a href="registro.html"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+        </ul>
+      </li>
+
+      <li><a href="Carrito.html"><i class="fas fa-cart-shopping"></i> Carrito</a></li>
+    </ul>
+  </nav>
+
+  <!-- Portatiles -->
+
+  <div class="container">
+
+    <!-- Sidebar filtros -->
+    <aside class="sidebar">
+      <h1>Filtrar portátiles</h1>
+
+      <div class="filter-group">
+        <h2>Marca</h2>
+        <label><input type="checkbox" name="brand" value="Dell"> Dell</label>
+        <label><input type="checkbox" name="brand" value="HP"> HP</label>
+        <label><input type="checkbox" name="brand" value="Lenovo"> Lenovo</label>
+        <label><input type="checkbox" name="brand" value="Apple"> Apple</label>
+      </div>
+
+      <div class="filter-group">
+        <h2>Precio</h2>
+        <label><input type="checkbox" name="price" value="0-500"> Hasta $500</label>
+        <label><input type="checkbox" name="price" value="501-1000">$501 - $1000</label>
+        <label><input type="checkbox" name="price" value="1001-1500">$1001 - $1500</label>
+        <label><input type="checkbox" name="price" value="1501-99999">Más de $1500</label>
+      </div>
+    </aside>
+
+    <!-- Productos y paginación -->
+    <section class="products-container">
+      <div class="products-grid" id="productsGrid">
+        <!-- Aquí se renderizan los productos -->
+      </div>
+
+      <nav class="pagination" id="pagination">
+        <!-- Botones de paginación -->
+      </nav>
+    </section>
+
+  </div>
+
+<script>
+  // Datos de productos (ejemplo)
+  const products = [
+    {id:1, name:"Dell Inspiron 15", brand:"Dell", price:450, img:"https://m.media-amazon.com/images/I/71FHTmB3msL._AC_SL1500_.jpg"},
+    {id:2, name:"HP Pavilion 14", brand:"HP", price:700, img:"https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c06668544.png"},
+    {id:3, name:"Lenovo ThinkPad X1", brand:"Lenovo", price:1400, img:"https://www.lenovo.com/medias/lenovo-laptop-thinkpad-x1-carbon-gen-9-feature-6.png"},
+    {id:4, name:"Apple MacBook Air M2", brand:"Apple", price:1200, img:"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-m2-select-202206_GEO_ES?wid=904&hei=840&fmt=jpeg&qlt=80&.v=1664497359481"},
+    {id:5, name:"Dell XPS 13", brand:"Dell", price:1300, img:"https://i.dell.com/sites/csimages/Master_Imagery/all/xps-13-9305-laptop-1.png"},
+    {id:6, name:"HP Envy 13", brand:"HP", price:1100, img:"https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c06662140.png"},
+    {id:7, name:"Lenovo Yoga 9i", brand:"Lenovo", price:1500, img:"https://www.lenovo.com/medias/lenovo-laptop-yoga-9i-14-intel-hero.png"},
+    {id:8, name:"Apple MacBook Pro 16", brand:"Apple", price:2500, img:"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-pro-16-select-202110?wid=904&hei=840&fmt=jpeg&qlt=80&.v=1632799175000"},
+    {id:9, name:"Dell G5 15 Gaming", brand:"Dell", price:1200, img:"https://i.dell.com/sites/csimages/Master_Imagery/all/g5-15-gaming-laptop-1.png"},
+    {id:10, name:"HP Omen 15", brand:"HP", price:1400, img:"https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c06664508.png"},
+    {id:11, name:"Lenovo Legion 5", brand:"Lenovo", price:1300, img:"https://www.lenovo.com/medias/lenovo-laptop-legion-5-pro-16-hero.png"},
+    {id:12, name:"Apple MacBook Air M1", brand:"Apple", price:999, img:"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-m1-select-202011_GEO_ES?wid=904&hei=840&fmt=jpeg&qlt=80&.v=1604278672000"}
+  ];
+
+  const productsPerPage = 6;
+  let currentPage = 1;
+  let filteredProducts = [...products];
+
+  const productsGrid = document.getElementById('productsGrid');
+  const pagination = document.getElementById('pagination');
+
+  // Función para renderizar productos según página
+  function renderProducts(page = 1) {
+    productsGrid.innerHTML = '';
+
+    const start = (page - 1) * productsPerPage;
+    const end = start + productsPerPage;
+    const productsToShow = filteredProducts.slice(start, end);
+
+    if (productsToShow.length === 0) {
+      productsGrid.innerHTML = '<p>No hay productos que coincidan con los filtros.</p>';
+      pagination.innerHTML = '';
+      return;
+    }
+
+    for (const p of productsToShow) {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <img class="product-img" src="${p.img}" alt="${p.name}" />
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">$${p.price.toLocaleString()}</div>
+      `;
+      productsGrid.appendChild(card);
+    }
+
+    renderPagination();
+  }
+
+  // Función para renderizar paginación
+  function renderPagination() {
+    pagination.innerHTML = '';
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+    if (totalPages <= 1) return;
+
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      if (i === currentPage) btn.classList.add('active');
+      btn.addEventListener('click', () => {
+        if (currentPage !== i) {
+          currentPage = i;
+          renderProducts(currentPage);
+          window.scrollTo({top:0, behavior:'smooth'});
+        }
+      });
+      pagination.appendChild(btn);
+    }
+  }
+
+  // Función para filtrar productos según filtros seleccionados
+  function filterProducts() {
+    const selectedBrands = [...document.querySelectorAll('input[name="brand"]:checked')].map(i => i.value);
+    const selectedPrices = [...document.querySelectorAll('input[name="price"]:checked')].map(i => i.value);
+
+    filteredProducts = products.filter(product => {
+      // Filtrar por marca
+      const brandMatch = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
+      // Filtrar por precio
+      const priceMatch = selectedPrices.length === 0 || selectedPrices.some(range => {
+        const [min, max] = range.split('-').map(Number);
+        return product.price >= min && product.price <= max;
+      });
+
+      return brandMatch && priceMatch;
+    });
+
+    currentPage = 1;
+    renderProducts(currentPage);
+  }
+
+  // Event listeners para filtros
+  document.querySelectorAll('.sidebar input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', filterProducts);
+  });
+
+  // Render inicial
+  renderProducts();
+
+</script>
+
+</body>
+</html>

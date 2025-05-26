@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catálogo de Monitores</title>
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* RESET */
+    
+    h1, h2 {
+      margin: 0 0 1rem;
+    }
+
+    /* Layout principal */
+    .container {
+      max-width: 1200px;
+      margin: 1rem auto;
+      padding: 0 1rem;
+      display: flex;
+      gap: 2rem;
+    }
+
+    /* Sidebar filtros */
+    .sidebar {
+      flex: 0 0 250px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+      height: fit-content;
+      position: sticky;
+      top: 1rem;
+    }
+
+    .filter-group {
+      margin-bottom: 2rem;
+    }
+
+    .filter-group h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      border-bottom: 2px solid #005f73;
+      padding-bottom: 0.3rem;
+      color: #005f73;
+    }
+
+    .filter-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+
+    /* Productos */
+    .products-container {
+      flex: 1;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 140px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .product-name {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      color: #023047;
+    }
+
+    .product-price {
+      font-weight: 700;
+      color: #fb8500;
+      margin-top: auto;
+      font-size: 1.1rem;
+    }
+
+    /* Paginación */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .pagination button {
+      border: none;
+      background: #eee;
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #555;
+      transition: background-color 0.3s ease;
+    }
+
+    .pagination button:hover {
+      background: #005f73;
+      color: white;
+    }
+
+    .pagination button.active {
+      background: #fb8500;
+      color: white;
+      cursor: default;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        position: static;
+        width: 100%;
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="Index.html" class="logo">
+      <img src="Imagenes/logo.png" alt="ShopCod Logo" />
+      <span>ShopCod</span>
+    </a>
+
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+
+    <ul class="nav-links">
+      <li><a href="Index.html"><i class="fas fa-house"></i> Inicio</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-laptop"></i> Productos</a>
+        <ul class="dropdown-menu">
+          <li><a href="portatiles.html"><i class="fas fa-laptop-code"></i> Laptops</a></li>
+          <li><a href="pcescritorio.html"><i class="fas fa-desktop"></i> PCs de escritorio</a></li>
+          <li><a href="monitores.html"><i class="fas fa-tv"></i> Monitores</a></li>
+          <li><a href="componentes.html"><i class="fas fa-microchip"></i> Componentes</a></li>
+          <li><a href="perifericos.html"><i class="fas fa-keyboard"></i> Periféricos</a></li>
+          <li><a href="accesorios.html"><i class="fas fa-headphones"></i> Accesorios</a></li>
+        </ul>
+      </li>
+
+      <li><a href="ofertas.html"><i class="fas fa-tags"></i> Ofertas</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-headset"></i> Atención al Cliente</a>
+        <ul class="dropdown-menu">
+          <li><a href="#"><i class="fas fa-tools"></i> Soporte Técnico</a></li>
+          <li><a href="#"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+          <li><a href="#"><i class="fas fa-truck"></i> Envíos y Devoluciones</a></li>
+          <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
+        </ul>
+      </li>
+
+      <li><a href="nosotros.html"><i class="fas fa-building"></i> Sobre Nosotros</a></li>
+
+      <li class="dropdown">
+        <a href="#"><i class="fas fa-user"></i> Mi Cuenta</a>
+        <ul class="dropdown-menu">
+          <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
+          <li><a href="registro.html"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+        </ul>
+      </li>
+
+      <li><a href="Carrito.html"><i class="fas fa-cart-shopping"></i> Carrito</a></li>
+    </ul>
+  </nav>
+
+  
+
+  <div class="container">
+
+    <!-- Sidebar filtros -->
+    <aside class="sidebar">
+      <div class="filter-group">
+        <h2>Marca</h2>
+        <label><input type="checkbox" name="brand" value="Samsung" /> Samsung</label>
+        <label><input type="checkbox" name="brand" value="LG" /> LG</label>
+        <label><input type="checkbox" name="brand" value="Dell" /> Dell</label>
+        <label><input type="checkbox" name="brand" value="Asus" /> Asus</label>
+      </div>
+      <div class="filter-group">
+        <h2>Tamaño (pulgadas)</h2>
+        <label><input type="checkbox" name="size" value="0-23" /> Hasta 23"</label>
+        <label><input type="checkbox" name="size" value="24-27" /> 24" - 27"</label>
+        <label><input type="checkbox" name="size" value="28-99" /> Más de 27"</label>
+      </div>
+      <div class="filter-group">
+        <h2>Precio</h2>
+        <label><input type="checkbox" name="price" value="0-200" /> Hasta $200</label>
+        <label><input type="checkbox" name="price" value="201-400" /> $201 - $400</label>
+        <label><input type="checkbox" name="price" value="401-99999" /> Más de $400</label>
+      </div>
+    </aside>
+
+    <!-- Productos -->
+    <section class="products-container">
+      <div class="products-grid" id="products-grid">
+        <!-- Productos generados dinámicamente -->
+      </div>
+
+      <div class="pagination" id="pagination">
+        <!-- Botones de paginación -->
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Datos de ejemplo para monitores
+    const products = [
+      { id: 1, name: "Samsung Curvo 24\"", brand: "Samsung", size: 24, price: 180, img: "Imagenes/ACCESORIOS/11.jpg" },
+      { id: 2, name: "LG UltraGear 27\"", brand: "LG", size: 27, price: 350, img: "Imagenes/ACCESORIOS/12.jpg" },
+      { id: 3, name: "Dell UltraSharp 23\"", brand: "Dell", size: 23, price: 220, img: "Imagenes/ACCESORIOS/13.jpg" },
+      { id: 4, name: "Asus ROG Swift 28\"", brand: "Asus", size: 28, price: 480, img: "Imagenes/ACCESORIOS/14.jpg" },
+      { id: 5, name: "Samsung Flat 22\"", brand: "Samsung", size: 22, price: 150, img: "Imagenes/ACCESORIOS/15.jpg" },
+      { id: 6, name: "LG 24MP59G", brand: "LG", size: 24, price: 200, img: "Imagenes/ACCESORIOS/16.jpg" },
+      { id: 7, name: "Dell P2719H", brand: "Dell", size: 27, price: 300, img: "Imagenes/ACCESORIOS/17.jpg" },
+      { id: 8, name: "Asus ProArt 32\"", brand: "Asus", size: 32, price: 650, img: "Imagenes/ACCESORIOS/18.jpg" },
+    ];
+
+    const productsPerPage = 4;
+    let currentPage = 1;
+    let filteredProducts = [...products];
+
+    // Render productos
+    function renderProducts() {
+      const grid = document.getElementById('products-grid');
+      grid.innerHTML = '';
+
+      const start = (currentPage - 1) * productsPerPage;
+      const end = start + productsPerPage;
+      const paginatedProducts = filteredProducts.slice(start, end);
+
+      if (paginatedProducts.length === 0) {
+        grid.innerHTML = '<p>No se encontraron productos con los filtros seleccionados.</p>';
+        return;
+      }
+
+      paginatedProducts.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <img src="${product.img}" alt="${product.name}" class="product-img" />
+          <h3 class="product-name">${product.name}</h3>
+          <p>Tamaño: ${product.size}"</p>
+          <p class="product-price">$${product.price}</p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Render paginación
+    function renderPagination() {
+      const pagination = document.getElementById('pagination');
+      pagination.innerHTML = '';
+
+      const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+      if(totalPages <= 1) return;
+
+      for(let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.className = i === currentPage ? 'active' : '';
+        btn.addEventListener('click', () => {
+          if(i !== currentPage) {
+            currentPage = i;
+            renderProducts();
+            renderPagination();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+        pagination.appendChild(btn);
+      }
+    }
+
+    // Aplicar filtros
+    function applyFilters() {
+      const brandCheckboxes = document.querySelectorAll('input[name="brand"]:checked');
+      const sizeCheckboxes = document.querySelectorAll('input[name="size"]:checked');
+      const priceCheckboxes = document.querySelectorAll('input[name="price"]:checked');
+
+      const selectedBrands = Array.from(brandCheckboxes).map(cb => cb.value);
+      const selectedSizes = Array.from(sizeCheckboxes).map(cb => cb.value);
+      const selectedPrices = Array.from(priceCheckboxes).map(cb => cb.value);
+
+      filteredProducts = products.filter(product => {
+        // Marca
+        const brandMatch = selectedBrands.length ? selectedBrands.includes(product.brand) : true;
+
+        // Tamaño
+        let sizeMatch = true;
+        if (selectedSizes.length) {
+          sizeMatch = selectedSizes.some(range => {
+            const [min, max] = range.split('-').map(Number);
+            return product.size >= min && product.size <= max;
+          });
+        }
+
+        // Precio
+        let priceMatch = true;
+        if (selectedPrices.length) {
+          priceMatch = selectedPrices.some(range => {
+            const [min, max] = range.split('-').map(Number);
+            return product.price >= min && product.price <= max;
+          });
+        }
+
+        return brandMatch && sizeMatch && priceMatch;
+      });
+
+      currentPage = 1;
+      renderProducts();
+      renderPagination();
+    }
+
+    // Eventos filtros
+    const filters = document.querySelectorAll('input[type="checkbox"]');
+    filters.forEach(filter => {
+      filter.addEventListener('change', applyFilters);
+    });
+
+    // Render inicial
+    renderProducts();
+    renderPagination();
+
+  </script>
+</body>
+</html>

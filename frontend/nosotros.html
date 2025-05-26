@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sobre Nosotros - ShopCod</title>
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    header {
+  background: #ff6f00; /* naranja intenso */
+  color: #ffffff;
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  margin-top: 2px;
+}
+
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.1em;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+}
+
+.about-box {
+  margin-bottom: 50px;
+}
+
+.about-box h2 {
+  font-size: 1.8em;
+  color: black; /* naranja oscuro */
+  margin-bottom: 15px;
+}
+
+.about-box p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #555;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.flip-card-front {
+  background-color: #fff3e0; /* fondo crema anaranjado */
+  color: #bf360c; /* texto naranja oscuro */
+}
+
+.flip-card-front h3 {
+  font-size: 1.3em;
+  text-align: center;
+}
+
+.flip-card-back {
+  background-color: #ffe0b2; /* naranja claro pastel */
+  color: #4e342e; /* marrón suave para contraste */
+  transform: rotateY(180deg);
+  font-size: 1em;
+  text-align: center;
+  padding: 20px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 0.9em;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .flip-card-inner {
+    height: 220px;
+  }
+
+  .flip-card-front h3,
+  .flip-card-back p {
+    font-size: 1em;
+  }
+}
+  </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="Index.html" class="logo">
+          <img src="Imagenes/logo.png" alt="ShopCod Logo" />
+          <span>ShopCod</span>
+        </a>
+    
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+    
+        <ul class="nav-links">
+          <li><a href="Index.html"><i class="fas fa-house"></i> Inicio</a></li>
+    
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-laptop"></i> Productos</a>
+            <ul class="dropdown-menu">
+              <li><a href="portatiles.html"><i class="fas fa-laptop-code"></i> Laptops</a></li>
+              <li><a href="pcescritorio.html"><i class="fas fa-desktop"></i> PCs de escritorio</a></li>
+              <li><a href="monitores.html"><i class="fas fa-tv"></i> Monitores</a></li>
+              <li><a href="componentes.html"><i class="fas fa-microchip"></i> Componentes</a></li>
+              <li><a href="perifericos.html"><i class="fas fa-keyboard"></i> Periféricos</a></li>
+              <li><a href="accesorios.html"><i class="fas fa-headphones"></i> Accesorios</a></li>
+            </ul>
+          </li>
+    
+          <li><a href="ofertas.html"><i class="fas fa-tags"></i> Ofertas</a></li>
+    
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-headset"></i> Atención al Cliente</a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><i class="fas fa-tools"></i> Soporte Técnico</a></li>
+              <li><a href="#"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+              <li><a href="#"><i class="fas fa-truck"></i> Envíos y Devoluciones</a></li>
+              <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
+            </ul>
+          </li>
+    
+          <li><a href="nosotros.html"><i class="fas fa-building"></i> Sobre Nosotros</a></li>
+    
+          <li class="dropdown">
+            <a href="#"><i class="fas fa-user"></i> Mi Cuenta</a>
+            <ul class="dropdown-menu">
+              <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
+              <li><a href="registro.html"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+            </ul>
+          </li>
+    
+          <li><a href="Carrito.html"><i class="fas fa-cart-shopping"></i> Carrito</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nosotros -->
+
+  <header>
+    <h1>Sobre Nosotros</h1>
+    <p>Descubre quiénes somos y por qué ShopCod es tu mejor aliado en tecnología</p>
+  </header>
+
+  <div class="about-container">
+
+    <div class="about-box">
+      <h2>¿Quiénes somos?</h2>
+      <p>ShopCod es una tienda especializada en la venta de productos relacionados con computadoras. Nos dedicamos a ofrecer tecnología de calidad, con un servicio ágil, confiable y orientado al cliente.</p>
+    </div>
+
+    <div class="about-box">
+      <h2>Misión, Visión y Valores</h2>
+      <div class="card-grid">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h3>🎯 Misión</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>Proveer productos de computación de alta calidad a precios competitivos, brindando una experiencia de compra eficiente, segura y accesible para todos nuestros clientes.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h3>🚀 Visión</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>Ser líderes en el mercado tecnológico nacional, reconocidos por nuestra innovación, confianza y excelencia en el servicio al cliente.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h3>💡 Valores</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>Compromiso, honestidad, innovación, responsabilidad, cercanía con el cliente y pasión por la tecnología.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-box">
+      <h2>¿Por qué elegirnos?</h2>
+      <div class="card-grid">
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h3>🚚 Envíos Eficientes</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>Entrega rápida, segura y con seguimiento a nivel nacional.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h3>🛡️ Garantía Oficial</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>Productos originales con respaldo y soporte técnico garantizado.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h3>💳 Pago Seguro</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>Múltiples métodos de pago con seguridad y confianza.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h3>📞 Atención Personalizada</h3>
+            </div>
+            <div class="flip-card-back">
+              <p>Te asesoramos en cada etapa de tu compra con un equipo humano y capacitado.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2025 ShopCod. Todos los derechos reservados.
+  </footer>
+
+</body>
+</html>
